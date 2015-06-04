@@ -1,0 +1,13 @@
+npm-debug.log
+node_modules
+config.json
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+._*
+*/._*
+*/*/._*
+coverage.*
+*.swp
+*.swo
+*.swn
