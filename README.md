@@ -1,5 +1,8 @@
 ## hapi-paginate
 
+[![npm version](https://badge.fury.io/js/hapi-paginate.svg)](http://badge.fury.io/js/hapi-paginate)
+[![Build Status](https://travis-ci.org/developmentseed/hapi-paginate.svg?branch=master)](https://travis-ci.org/developmentseed/hapi-paginate)
+
 A basic pagination plugin for [Hapi](http://hapijs.com/).
 
 The plugin listens to `page` and `limit` query parameters and add them to `request` object.
