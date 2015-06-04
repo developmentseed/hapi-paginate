@@ -10,6 +10,9 @@ exports.register = function (server, options, next) {
   var results = options.results || 'results';
 
   server.ext('onPreHandler', function (request, reply) {
+    var page = 1;
+    var limit = options.limit || 100;
+
     if (_.has(request.query, 'page')) {
       page = _.parseInt(request.query.page);
       request.query = _.omit(request.query, 'page');

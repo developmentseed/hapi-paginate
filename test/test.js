@@ -44,10 +44,25 @@ describe('hapi-test', function () {
     server.register(require('../'), function (err) {
       expect(err).to.be.empty;
 
+      // call page and limit
       var request = { method: 'GET', url: '/?page=3&limit=10'};
       server.inject(request, function (res) {
         expect(res.request.page).to.equal(3);
         expect(res.request.limit).to.equal(10);
+      });
+
+      // call again withtout them and make sure page is back to default value
+      var request = { method: 'GET', url: '/'};
+      server.inject(request, function (res) {
+        expect(res.request.page).to.equal(1);
+        expect(res.request.limit).to.equal(100);
+      });
+
+      // call again with them and see if correct value is returned
+      var request = { method: 'GET', url: '/?page=4&limit=11'};
+      server.inject(request, function (res) {
+        expect(res.request.page).to.equal(4);
+        expect(res.request.limit).to.equal(11);
         done();
       });
     });
