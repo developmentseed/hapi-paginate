@@ -10,8 +10,8 @@ exports.register = function (server, options, next) {
   var results = options.results || 'results';
 
   server.ext('onPreHandler', function (request, reply) {
-    var page = 1;
-    var limit = options.limit || 100;
+    page = 1;
+    limit = options.limit || 100;
 
     if (_.has(request.query, 'page')) {
       page = _.parseInt(request.query.page);
@@ -31,8 +31,8 @@ exports.register = function (server, options, next) {
 
   server.ext('onPreResponse', function (request, reply) {
     var meta = {
-    page: page,
-    limit: limit
+    page: request.page,
+    limit: request.limit
     };
 
     if (_.has(request, 'count')) {
