@@ -11,6 +11,8 @@ The Hapi app should decide how to handle `request.page` and `request.limit` valu
 
 The plugin then adds a `meta` key to the output json response and move the response under `results` key.
 
+To limit the plugin to specific routes, adds `routes` to options.
+
 ### Example
 
 curl -X GET http://www.example.com?page=3&limit=100
@@ -43,7 +45,8 @@ hapi.register({
   options: {
     limit: 1000,
     name: 'My Meta',
-    results: 'output'
+    results: 'output',
+    routes: ['/', '/api']
   }
 };
 ```
