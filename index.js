@@ -8,10 +8,11 @@ exports.register = function (server, options, next) {
   var limit = options.limit || 100;
   var name = options.name || 'meta';
   var results = options.results || 'results';
+  var routes = options.routes || ['*'];
 
   server.ext('onPreHandler', function (request, reply) {
-    var page = 1;
-    var limit = options.limit || 100;
+    page = 1;
+    limit = options.limit || 100;
 
     if (_.has(request.query, 'page')) {
       page = _.parseInt(request.query.page);
@@ -31,22 +32,24 @@ exports.register = function (server, options, next) {
 
   server.ext('onPreResponse', function (request, reply) {
     var meta = {
-    page: page,
-    limit: limit
+    page: request.page,
+    limit: request.limit
     };
 
     if (_.has(request, 'count')) {
       meta.found = request.count;
     }
 
-    if (_.has(request.response.source, name)) {
-      request.response.source[name] = _.merge(request.response.source[name], meta);
-    } else {
-      // Because we want to add meta to top of the source, we have to go through all this hastle
-      var temp = request.response.source;
-      request.response.source = {};
-      request.response.source[name] = meta;
-      request.response.source[results] = temp;
+    if (routes.indexOf(request.route.path) !== -1 || routes[0] === '*') {
+      if (_.has(request.response.source, name)) {
+        request.response.source[name] = _.merge(request.response.source[name], meta);
+      } else {
+        // Because we want to add meta to top of the source, we have to go through all this hastle
+        var temp = request.response.source;
+        request.response.source = {};
+        request.response.source[name] = meta;
+        request.response.source[results] = temp;
+      }
     }
 
     return reply.continue();
