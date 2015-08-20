@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - '0.12'
+- '0.12'
 branches:
   only:
-    - master
-    - develop
+  - master
+  - develop
 script:
-  - npm test
+- npm test
 deploy:
   provider: npm
   email: dev@developmentseed.org
   api_key:
-    secure: PP/9Iwhyro6Zffnh4Kre89R+O+1Fm0UJneSIdpr0mGF9jY8LLx6KuKKOXyFzGO4ClcWKpVRyL/uBLSybpgKRlxHC/I/iM3oGVj2CYRjAqdeyzCnfJJHjQdD9Ph7wqAW9kHO3LYDpRi5fbgTd+T2A22G+xtrXiPFPRL5iImZiMoGNdIvC/o8vNdl8Zr1J6hLvq7wj3YDWnFrtGwXoAZ7KJP3i2sNRJwxK4HvZec1LOGtssAelaI8HADBcKy6Usuuco4xuj6k8BHOKYPcg9/fIKdM2WOEHaM1Btz3L48eeh0wPPBBycxUYDC77SHNiU5dkV59MJJ2QDBGjaa3rTVf9yfpDS0j3BIzqvN01Lp3cuZGAKN9tCnlxZ0vTAgCmDwt3jJig9r+dbdQhBOc1zDkNeKYezCzQj0yABVhO53/CG9Yr0WfEpwv9NTRs3ZcSa3KLXFfp5C2sG0l5RmZ4G1WDVCnPrdEXa4I/GqfVFFYtJJL1JeFfY0FTQ0gzrG+nS2iS7Ps/xANUig9VOhtK8N9EQhLIDYqbYcJxI8rAvEmovBKUAEeqc3uXogBtWJezQ9uHZjncG7Jg4nqxk6fXLFT/s5FgnREBH/b1UfYLwBWof3gppYKx7d740EhkyANpuoHBA8RcjIQnqdcuP20lK2sLRFhywhZppFVmwaotSewzoDQ=
+    secure: F3vN2sXoNqhtX6LqF+K9bvlRm+ZKa7mfL80HC6uBPmUntPvuopfIL+HzcnTsjS+rCw76B89cARUyE+2ezc8MPVRiMP5lu432DU4y/gvomO/6z+YSt5v1By9ewJVx6sveOKZeQt8I+PqUvi1544M3MI5kZwoerv8eQpfPcaY7t6Rtq8hdDMQAc9Lo/icTqFbXscWWAUJG5PD/qcY7d+Rhpa50IcwWDcWhPmsxjuRRcJi7azu4mDxUiBoNoTupGflz5+3va3mNXZwo2M4v+KAra8dMzpRjORatz750hIgoe+UUeRERNYy4uk3v18qDpBzU0EjOccUtEpkUkhmaiJH01OCTTora/ZoeGQqVdwnKTO+sGyb3xj3wL++CFQPuJ5BH8G8gb2Sim6XjmZ4lxT3iW/bUBQms+1IHtAQBb/mqx0bSHRITRxZZOi6D8x943Iz/8ZTntmUj2Zt05b7agzOKF+74guImrJqYV1VWSZawkvW0mpA2NP3xlRWp8C6yqcyhW2VJhAoqFEfXKB0ausW+vPQ/jLHeg4jqNsUJlex5XV+WxZC5mPlUIdld+Pd+TZWaMu6xmuxNa1p8gjfS03xlKOuijXU5ou41M4XE4TGEDo0WDeiwkYrjN2O6kSMiTjTz8EbmJzQoEUZQCGqALgo2omInKUUXhGnjGUESqXZ/Jgc=
   on:
     repo: developmentseed/hapi-paginate
     branch: master
