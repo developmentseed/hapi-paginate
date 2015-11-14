@@ -4,37 +4,40 @@
 var _ = require('lodash');
 
 exports.register = function (server, options, next) {
-  var page = 1;
-  var limit = options.limit || 100;
+  var defaultPage = 1;
+  var defaultLimit = options.limit || 100;
   var name = options.name || 'meta';
   var results = options.results || 'results';
   var routes = options.routes || ['*'];
   var excludeFormats = options.excludeFormats || [];
+  var requestLimit = defaultLimit;
+  var requestPage = defaultPage;
 
   server.ext('onPreHandler', function (request, reply) {
-    page = 1;
-    limit = options.limit || 100;
-
     if (_.has(request.query, 'page')) {
-      page = _.parseInt(request.query.page);
+      requestPage = _.parseInt(request.query.page);
       request.query = _.omit(request.query, 'page');
+    } else {
+      requestPage = defaultPage;
     }
 
     if (_.has(request.query, 'limit')) {
-      limit = _.parseInt(request.query.limit);
+      requestLimit = _.parseInt(request.query.limit);
       request.query = _.omit(request.query, 'limit');
+    } else {
+      requestLimit = defaultLimit;
     }
 
-    request.page = page;
-    request.limit = limit;
+    request.page = requestPage;
+    request.limit = requestLimit;
 
     return reply.continue();
   });
 
   server.ext('onPreResponse', function (request, reply) {
     var meta = {
-    page: request.page,
-    limit: request.limit
+      page: requestPage,
+      limit: requestLimit
     };
 
     if (_.has(request, 'count')) {
@@ -52,6 +55,13 @@ exports.register = function (server, options, next) {
         request.response.source = {};
         request.response.source[name] = meta;
         request.response.source[results] = temp;
+      }
+    } else {
+      // Remove any previous meta content since we don't want it in this case
+      if (_.has(request.response.source, name)) {
+        delete request.response.source[name].page;
+        delete request.response.source[name].limit;
+        delete request.response.source[name].found;
       }
     }
 

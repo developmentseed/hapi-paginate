@@ -1,4 +1,4 @@
-/* global require, describe, it, before */
+/* global require, describe, it */
 'use strict';
 
 var Hapi = require('hapi');
