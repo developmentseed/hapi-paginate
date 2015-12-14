@@ -37,7 +37,7 @@ exports.register = function (server, options, next) {
   server.ext('onPreResponse', function (request, reply) {
     var meta = {
       page: requestPage,
-      limit: requestLimit
+      limit: request.limit
     };
 
     if (_.has(request, 'count')) {
